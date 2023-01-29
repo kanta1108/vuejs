@@ -1,9 +1,6 @@
 <template>
     <div class="header">
-        <slot name="title">
-            <h1>default</h1>
-        </slot>
-        <slot name="number"></slot>
+        <slot></slot>
     </div><!-- /.header -->
 </template>
 <script>
@@ -27,11 +24,4 @@ export default {
     }
 }
 </script>
-<style scoped>
-div{
-    border: 2px dashed #000;
-}
-h2,p{
-    color: blue;
-}
-</style>
+
