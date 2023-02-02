@@ -17,3 +17,5 @@ Vue.mixin({
 new Vue({
   render: (h) => h(App),
 }).$mount("#app");
+
+console.log("test"); // テストです
