@@ -2,9 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import LikeNumber from "./components/LikeNumber";
 
-import VAnimateCss from "animate.css";
-// Install Animate.css
-Vue.use(VAnimateCss);
 
 Vue.config.productionTip = true;
 Vue.component("LikeNumber", LikeNumber);
