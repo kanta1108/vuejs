@@ -25,11 +25,31 @@ export default new Router({
         default: Users,
         header: HeaderUsers,
       },
-      props: true,
+      props: {
+        default: true
+      },
       children: [
         { path: "posts", component: UsersPosts },
         { path: "profile", component: UsersProfile, name: "users-id-profile" },
       ],
     },
+    {
+      path: '/users', redirect: "/users/1"
+    },
+    {
+      path: '*',
+      redirect: '/'
+    }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    console.log(savedPosition)
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      return {
+        selector: to.hash,
+      }
+    }
+  }
 });
