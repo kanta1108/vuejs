@@ -16,7 +16,9 @@
         }"
         >Next User's Profile</router-link
       >
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view> 
+      </transition>
       <div style="height: 1700px"></div>
       <router-link
         id="next-user"
@@ -31,3 +33,13 @@ export default {
   props: ["id"],
 };
 </script>
+<style>
+.fade-enter,
+.fade-leave-to{
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active{
+  transition: opacity 0.5s;
+}
+</style>

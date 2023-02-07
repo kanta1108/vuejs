@@ -3,6 +3,8 @@
     <h3>Home</h3>
     <div class="kv">
       <h4>key visual</h4>
+      <p>{{ doubleCount }}</p>
+      <p>{{ tripleCount }}</p>
     </div>
     <div>
       <button @click="toUsers">Users</button>
@@ -27,7 +29,9 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 export default {
+  computed:mapGetters(['doubleCount', 'tripleCount']),
   methods: {
     toUsers() {
       this.$router.push("users");
