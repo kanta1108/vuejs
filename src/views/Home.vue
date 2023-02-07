@@ -29,9 +29,11 @@
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from "vuex";
 export default {
-  computed:mapGetters(['doubleCount', 'tripleCount']),
+  computed: {
+    ...mapGetters(["doubleCount", "tripleCount"]),
+  },
   methods: {
     toUsers() {
       this.$router.push("users");

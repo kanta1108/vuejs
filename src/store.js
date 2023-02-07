@@ -11,4 +11,12 @@ export default new Vuex.Store({
     doubleCount: (state) => state.count * 2,
     tripleCount: (state) => state.count * 3,
   },
+  mutations: {
+    increment(state, number) {
+      state.count *= number
+    },
+    decrement(state, number) {
+      state.count -= number
+    }
+  }
 });
