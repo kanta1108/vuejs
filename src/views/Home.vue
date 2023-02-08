@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h3>Home</h3>
     <div class="kv">
       <h4>key visual</h4>
       <p>{{ doubleCount }}</p>
