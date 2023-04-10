@@ -1,70 +1,66 @@
+/**
+ * Vue Routerを使う
+ */
+
 import Vue from "vue";
-import Router from "vue-router";
-// import Home from "./views/Home";
-// import Users from "./views/Users";
-// import UsersPosts from "./views/UsersPosts";
-// import UsersProfile from "./views/UsersProfile";
-// import HeaderHome from "./views/HeaderHome";
-// import HeaderUsers from "./views/HeaderUsers";
+import Router from "vue-router"; //Routerをインポート
+import Home from "./views/Home.vue"; //ルーティングしたいコンポーネントをインポート
+import Users from "./views/Users.vue"; //ルーティングしたいコンポーネントをインポート
+import UsersPosts from "./views/UsersPosts.vue"; //ルーティングしたいコンポーネントをインポート
+import UsersProfile from "./views/UsersProfile.vue"; //ルーティングしたいコンポーネントをインポート
+import HeaderHome from "./views/HeaderHome"; //ルーティングしたいコンポーネントをインポート
+import HeaderUsers from "./views/HeaderUsers"; //ルーティングしたいコンポーネントをインポート
 
-const Home = () => import("./views/Home");
-const Users = () => import("./views/Users");
-const UsersPosts = () => import("./views/UsersPosts");
-const UsersProfile = () => import("./views/UsersProfile");
-const HeaderHome = () => import("./views/HeaderHome");
-const HeaderUsers = () => import("./views/HeaderUsers");
+Vue.use(Router); //VueにRouterを使うことを伝える
 
-Vue.use(Router);
-
+//Routerインスタンスを作成。必ずexport defaultでエクスポートする
 export default new Router({
-  mode: "history",
+  mode: "history", //URLに#がつかない
   routes: [
+    /**
+     * ルーティングの設定
+     * path: パス
+     * components: パスにアクセスしたときに表示するコンポーネント
+     */
     {
       path: "/",
       components: {
-        default: Home,
-        header: HeaderHome,
-      },
-      beforeEnter(to, from, next) {
-        next();
-      },
+        default: Home, //defaultは、名前をつけない場合の名前
+        header: HeaderHome
+      }
     },
     {
-      path: "/users/:id",
+      path: "/users/:id", //:idは動的なパラメータ
       components: {
         default: Users,
-        header: HeaderUsers,
+        header: HeaderUsers
       },
+      name: "users", //ルート名を設定する
       props: {
+        //propsをtrueにすると、コンポーネントにパラメータが渡される
+        //componentsをオブジェクトに指定した場合は、propsをオブジェクトにしてコンポーネントごとに設定する
         default: true,
+        header: true
       },
       children: [
-        { path: "posts", component: UsersPosts },
-        { path: "profile", component: UsersProfile, name: "users-id-profile" },
-      ],
+        //子ルートの設定
+        {
+          path: "posts", //子ルートのパスは、頭に/をつけない
+          component: UsersPosts,
+          name: "users-id-posts" //ルート名を設定する
+        },
+        {
+          path: "profile",
+          component: UsersProfile,
+          name: "users-id-profile", //ルート名を設定する
+          props: true
+        }
+      ]
     },
     {
-      path: "/users",
-      redirect: "/users/1",
-    },
-    {
-      path: "*",
-      redirect: "/",
-    },
-  ],
-  scrollBehavior(to, from, savedPosition) {
-    return new Promise((resolve) => {
-      this.app.$root.$once("triggerScroll", () => {
-        let position = { x: 0, y: 0 };
-        if (savedPosition) {
-          position = savedPosition;
-        }
-        if (to.hash) {
-          position = { selector: to.hash };
-        }
-        console.log(position);
-        resolve(position);
-      });
-    });
-  },
+      //リダイレクトの設定
+      path: "/hello",
+      redirect: "/" //リダイレクト先のパスを指定する
+    }
+  ]
 });

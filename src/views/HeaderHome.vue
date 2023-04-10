@@ -1,36 +1,29 @@
 <template>
-  <nav>
+  <div>
     <h2>Home</h2>
-    <p>{{ count }}</p>
-    <button @click="increment">+1</button>
-    <button @click="decrement">-1</button>
-    <router-link to="/" tag="button" active-class="active" exact
-      >Home</router-link
-    >
-    <router-link to="/users" tag="button" active-class="active" exact
-      >Users</router-link
-    >
-  </nav>
+    <nav>
+      <!-- リンクはrouter-linkを使う
+          リンク先はhrefではなくtoを使う -->
+      <!--
+          active-classはリンクがアクティブになったときに付与されるクラス名
+          exactはリンクが完全に一致したときにのみアクティブになる
+          -->
+      <router-link to="/" class="link" active-class="link--active" exact>Home</router-link>
+      |
+      <router-link :to="{ name: 'users', params: { id: 1 } }" class="link" active-class="link--active"
+        >Users</router-link
+      >
+    </nav>
+  </div>
 </template>
-<script>
-export default {
-  computed: {
-    count() {
-      return this.$store.state.count;
-    },
-  },
-  methods: {
-    increment() {
-      this.$store.commit("increment", 2);
-    },
-    decrement() {
-      this.$store.commit("decrement", 2);
-    },
-  },
-};
-</script>
-<style>
-nav {
-  text-align: center;
-}
+<style scoped>
+  .link {
+    color: #42b983;
+    text-decoration: none;
+    font-weight: bold;
+    opacity: 0.5;
+  }
+  .link--active {
+    opacity: 1;
+  }
 </style>

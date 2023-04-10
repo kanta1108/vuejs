@@ -1,78 +1,22 @@
 <template>
   <div class="home">
-    <h3>Home</h3>
-    <div class="kv">
-      <h4>key visual</h4>
-      <p>{{ doubleCount }}</p>
-      <p>{{ tripleCount }}</p>
-    </div>
-    <div>
-      <button @click="toUsers">Users</button>
-    </div>
-    <ul class="ul">
-      <li>list</li>
-      <li>list</li>
-      <li>list</li>
-      <li>list</li>
-      <li>list</li>
-    </ul>
-    <div class="wrapper">
-      <div class="card">
-        <span>1</span>
-        <p>paragraph</p>
-      </div>
-      <div class="card">
-        <span>2</span>
-        <p>paragraph</p>
-      </div>
-    </div>
+    <h1>Home</h1>
+    <button @click="toUsers">User</button>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-export default {
-  computed: {
-    ...mapGetters(["doubleCount", "tripleCount"]),
-  },
-  methods: {
-    toUsers() {
-      this.$router.push("users");
-    },
-  },
-};
+  export default {
+    name: 'Home',
+    methods: {
+      toUsers() {
+        //$routerでルーティングを行う
+        //pushメソッドで遷移先を指定する
+        this.$router.push({
+          name: 'users-id-profile', //pathではなくnameを指定することもできる
+          params: { id: 1 }
+        });
+      }
+    }
+  };
 </script>
-<style scoped>
-.home {
-  display: flex;
-  flex-direction: column;
-  gap: 10vw;
-}
-h3 {
-  text-align: center;
-}
-.kv {
-  height: 40vw;
-  background-color: #ebebeb;
-}
-.ul {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  gap: 10vw;
-}
-li {
-  list-style: none;
-}
-.wrapper {
-  display: flex;
-  flex-direction: row;
-}
-.card {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
+<style scoped></style>
